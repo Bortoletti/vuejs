@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+
+<body>
+
+<div id='appVue'>
+
+    <div id='view' v-for="mes in meses">
+        <label>{{mes.mes}}</label><br>
+        <input type='text' v-model="mes.valor">
+        <button @click="exibir(mes)">Exibir</button>
+    </div>
+    
+</div>
+
+
+
+</body>
+<script>
+    var app = new Vue({
+        el:'#appVue'
+        , data : {
+           meses: []
+           , vlTotal : 0
+        }
+        , watch: {
+            meses : function( novo, velho )
+            {
+                this.vlTotal += ( novo - velho )
+            }
+        }
+        , methods : {
+            iniciar : function(){
+                this.vlTotal = 0
+                for( var i = 1; i <= 12; i++ )
+                {
+                    var mes = {id:i,mes:i + "/2021", valor:0}
+                    this.meses.push( mes ) 
+                }
+            }
+            , exibir: function( mesp ){
+                alert( "Valor: " + mesp.valor )
+            }
+        }
+    })
+
+app.iniciar()
+
+</script>
+
+</html>
